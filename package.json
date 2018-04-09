@@ -1,0 +1,16 @@
+{
+    "name": "server",
+    "description": "NodeJS app",
+    "author": "Alan Chau",
+    "version": "0.0.1",
+    "dependencies": {
+        "async": "^2.6.0",
+        "express": "^4.16.2",
+        "mongodb": "^2.2.33",
+        "socket.io": "^2.0.4"
+    },
+    "engine": "node >= 0.10.0",
+    "scripts": {
+        "start": "node server running"
+    }
+}
