@@ -6,17 +6,18 @@ var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 var async = require('async');
 var mongourl = 'mongodb://s1141002:159753@ds123658.mlab.com:23658/buildary';
-
+var currentUser={};
 app.set('port',process.env.PORT || 8099);
 
 io.on("connection", function(socket){
-	var currentUser;
+
 	socket.on("USER_CONNECT",function(){
 		console.log("User connected");
 		socket.emit("USER_CONNECTED",{message:'test'});
 	});
 	socket.on("LOGIN",function(email){
-		console.log("User login email:"+email.id);
+		
+		console.log("User login id:"+email.id);
 		MongoClient.connect(mongourl, function(err, db) {
 			assert.equal(err,null);
 			console.log('Connected to MongoDB\n');
@@ -38,6 +39,7 @@ io.on("connection", function(socket){
 					db.close();
 					console.log(doc);
 					console.log('Disconnected from MongoDB\n');
+					console.log(currentUser);
 					for (key in doc) {
 						currentUser[key] = doc[key];
 					}
