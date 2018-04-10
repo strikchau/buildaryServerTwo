@@ -205,11 +205,12 @@ io.on("connection", function(socket){
 
 	socket.on("GETWITHDATA",function(id){
 		console.log("Get game with data with id:"+id._id);
+		var new_oid={'_id':{ '$oid':id._id}};
 		MongoClient.connect(mongourl, function(err, db) {
 			assert.equal(err,null);
 			console.log('Connected to MongoDB\n');
 			db.collection('block').
-			findOne(id,function(err,doc) {
+			findOne(new_oid,function(err,doc) {
 				assert.equal(err,null);
 				db.close();
 				console.log('success');
