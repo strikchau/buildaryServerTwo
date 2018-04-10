@@ -5,9 +5,11 @@ var io=require('socket.io').listen(server);
 var MongoClient = require('mongodb').MongoClient; 
 var assert = require('assert');
 var async = require('async');
+var oid=require('mongodb').ObjectID;
 var mongourl = 'mongodb://s1141002:159753@ds123658.mlab.com:23658/buildary';
 var currentUser={};
 app.set('port',process.env.PORT || 8099);
+
 
 io.on("connection", function(socket){
 
