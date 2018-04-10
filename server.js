@@ -204,7 +204,7 @@ io.on("connection", function(socket){
 	});
 
 	socket.on("GETWITHDATA",function(id){
-		console.log("Get game with data");
+		console.log("Get game with data with id:"+id._id);
 		MongoClient.connect(mongourl, function(err, db) {
 			assert.equal(err,null);
 			console.log('Connected to MongoDB\n');
