@@ -39,7 +39,6 @@ io.on("connection", function(socket){
 					db.close();
 					console.log(doc);
 					console.log('Disconnected from MongoDB\n');
-					console.log(currentUser);
 					for (key in doc) {
 						currentUser[key] = doc[key];
 					}
@@ -180,7 +179,6 @@ io.on("connection", function(socket){
 					assert.equal(err,null);
 					db.close();
 					console.log('success');
-					console.log(doc);
 					console.log('Disconnected from MongoDB\n');
 					socket.emit("FINDBYID",doc);
 			});
