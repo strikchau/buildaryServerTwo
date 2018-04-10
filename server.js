@@ -205,7 +205,8 @@ io.on("connection", function(socket){
 
 	socket.on("GETWITHDATA",function(id){
 		console.log("Get game with data with id:"+id._id);
-		var new_oid={'_id':{ '$oid':id._id}};
+		var new_oid={'_id':{ '$oid':""+id._id}};
+		console.log(new_oid);
 		MongoClient.connect(mongourl, function(err, db) {
 			assert.equal(err,null);
 			console.log('Connected to MongoDB\n');
