@@ -213,6 +213,7 @@ io.on("connection", function(socket){
 				assert.equal(err,null);
 				db.close();
 				console.log('success');
+				console.log(doc);
 				console.log('Disconnected from MongoDB\n');
 				socket.emit("GETWITHOUTDATA",doc);
 			});
