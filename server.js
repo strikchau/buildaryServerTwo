@@ -130,7 +130,6 @@ io.on("connection", function(socket){
 					db.close();
 					console.log('success');
 					console.log('Disconnected from MongoDB\n');
-					socket.emit("SAVE",new_blocks);
 			});
 		});
 	});
@@ -151,7 +150,22 @@ io.on("connection", function(socket){
 					db.close();
 					console.log('success');
 					console.log('Disconnected from MongoDB\n');
-					socket.emit("SHARE",new_blocks);
+			});
+		});
+	});
+
+	socket.on("LOADGAMELIST",function(blocks){
+		console.log("Load game list");
+		MongoClient.connect(mongourl, function(err, db) {
+			assert.equal(err,null);
+			console.log('Connected to MongoDB\n');
+			db.collection('block').
+				find({'id':blocks.id,'share':false},{blocks:0},function(err,doc) {
+					assert.equal(err,null);
+					db.close();
+					console.log('success');
+					console.log('Disconnected from MongoDB\n');
+					socket.emit("LOADGAMELIST",doc);
 			});
 		});
 	});
