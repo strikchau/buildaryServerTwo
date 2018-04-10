@@ -181,7 +181,7 @@ io.on("connection", function(socket){
 					console.log('success');
 					console.log(doc);
 					console.log('Disconnected from MongoDB\n');
-					socket.emit("FINDBYID",doc);
+					socket.emit("FINDBYID",{'hi':"hi"});
 					console.log("finish emit");
 			});
 		});
