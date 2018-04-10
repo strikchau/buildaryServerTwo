@@ -170,7 +170,7 @@ io.on("connection", function(socket){
 	});
 
 	socket.on("FINDBYID",function(user){
-		console.log("Load game list");
+		console.log("Load game list by userid:"+user.id);
 		MongoClient.connect(mongourl, function(err, db) {
 			assert.equal(err,null);
 			console.log('Connected to MongoDB\n');
