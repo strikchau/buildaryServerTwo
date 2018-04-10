@@ -170,6 +170,23 @@ io.on("connection", function(socket){
 		});
 	});
 
+	socket.on("FINDBYID",function(user){
+		console.log("Load game list");
+		MongoClient.connect(mongourl, function(err, db) {
+			assert.equal(err,null);
+			console.log('Connected to MongoDB\n');
+			db.collection('block').
+				find({'invite':{$regex : ".*"+user.id+".*"},'share':true},{blocks:0},function(err,doc) {
+					assert.equal(err,null);
+					db.close();
+					console.log('success');
+					console.log(doc);
+					console.log('Disconnected from MongoDB\n');
+					socket.emit("FINDBYID",doc);
+			});
+		});
+	});
+
 	socket.on("GETWITHOUTDATA",function(id){
 		console.log("Get game without data");
 		MongoClient.connect(mongourl, function(err, db) {
