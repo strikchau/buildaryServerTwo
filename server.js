@@ -217,7 +217,7 @@ io.on("connection", function(socket){
 				console.log('success');
 				console.log(doc);
 				console.log('Disconnected from MongoDB\n');
-				socket.emit("GETWITHOUTDATA",doc);
+				socket.emit("GETWITHDATA",doc);
 			});
 		});
 	});
