@@ -152,10 +152,11 @@ io.on("connection", function(socket){
 			console.log('Connected to MongoDB\n');
 			var new_blocks={};
 			for (key in blocks) {
+				if(key!='_id')
 				new_blocks[key] = blocks[key];
 			}
 			new_blocks['share'] = true;
-			console.log(new_blocks.hasOwnProperty("_id"));
+			console.log(blocks.hasOwnProperty("_id"));
 			if(!new_blocks.hasOwnProperty("_id")){
 			db.collection('block').
 				update({'createtime': blocks.createtime,'id':blocks.id},new_blocks,{upsert:true},function(err,doc) {
@@ -166,7 +167,7 @@ io.on("connection", function(socket){
 			});}
 			else{
 				db.collection('block').
-				update({_id: ObjectId(new_blocks._id)},new_blocks,{upsert:true},function(err,doc) {
+				update({_id: ObjectId(blocks._id)},new_blocks,function(err,doc) {
 					assert.equal(err,null);
 					db.close();
 					console.log('success');
