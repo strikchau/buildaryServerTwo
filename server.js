@@ -206,6 +206,7 @@ io.on("connection", function(socket){
 					db.close();
 					console.log('success');
 					console.log('Disconnected from MongoDB\n');
+					console.log(doc);
 					var newJson={'data':doc};
 					socket.emit("REVISION",newJson);
 			});
