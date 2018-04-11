@@ -201,7 +201,7 @@ io.on("connection", function(socket){
 			assert.equal(err,null);
 			console.log('Connected to MongoDB\n');
 			db.collection('block').
-				find({$or:[{'id':user.id,'share':true},{'notAnswered':{$regex : ".*"+user.id+".*"}}]},{blocks:0}).toArray(function(err,doc) {
+				find({$or:[{'id':user.id,'share':true},{'Answered':{$regex : ".*"+user.id+".*"}}]},{blocks:0}).toArray(function(err,doc) {
 					assert.equal(err,null);
 					db.close();
 					console.log('success');
