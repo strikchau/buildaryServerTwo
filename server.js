@@ -121,6 +121,7 @@ io.on("connection", function(socket){
 			new_blocks['email']=blocks.email;
 			new_blocks['block']=blocks.block;*/
 			for (key in blocks) {
+				if(key!='_id')
 				new_blocks[key] = blocks[key];
 			}
 			new_blocks['share'] = false;
@@ -135,7 +136,7 @@ io.on("connection", function(socket){
 			});}
 			else{
 				db.collection('block').
-				update({_id: ObjectId(new_blocks._id)},new_blocks,{upsert:true},function(err,doc) {
+				update({_id: ObjectId(blocks._id)},new_blocks,function(err,doc) {
 					assert.equal(err,null);
 					db.close();
 					console.log('success');
