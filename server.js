@@ -196,7 +196,7 @@ io.on("connection", function(socket){
 	});
 
 	socket.on("REVISION",function(user){
-		console.log("Revision game list");
+		console.log("Revision game list by id:"+user.id);
 		MongoClient.connect(mongourl, function(err, db) {
 			assert.equal(err,null);
 			console.log('Connected to MongoDB\n');
