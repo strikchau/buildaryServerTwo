@@ -182,12 +182,13 @@ io.on("connection", function(socket){
 			assert.equal(err,null);
 			console.log('Connected to MongoDB\n');
 			db.collection('block').
-				find({'id':blocks.id,'share':false},{blocks:0},function(err,doc) {
+				find({'id':blocks.id,'share':false},{blocks:0}).toArray(function(err,doc) {
 					assert.equal(err,null);
 					db.close();
 					console.log('success');
 					console.log('Disconnected from MongoDB\n');
-					socket.emit("LOADGAMELIST",doc);
+					var newJson={'data':doc};
+					socket.emit("LOADGAMELIST",newJson);
 			});
 		});
 	});
@@ -207,22 +208,6 @@ io.on("connection", function(socket){
 					var newJson={'data':doc};
 					socket.emit("FINDBYID",newJson);
 					console.log("finish emit");
-			});
-		});
-	});
-
-	socket.on("GETWITHOUTDATA",function(id){
-		console.log("Get game without data");
-		MongoClient.connect(mongourl, function(err, db) {
-			assert.equal(err,null);
-			console.log('Connected to MongoDB\n');
-			db.collection('block').
-			findOne(id,{block:0},function(err,doc) {
-				assert.equal(err,null);
-				db.close();
-				console.log('success');
-				console.log('Disconnected from MongoDB\n');
-				socket.emit("GETWITHOUTDATA",doc);
 			});
 		});
 	});
