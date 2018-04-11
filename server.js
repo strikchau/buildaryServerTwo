@@ -125,8 +125,8 @@ io.on("connection", function(socket){
 				new_blocks[key] = blocks[key];
 			}
 			new_blocks['share'] = false;
-			console.log(new_blocks.hasOwnProperty("_id"));
-			if(!new_blocks.hasOwnProperty("_id")){
+			console.log(blocks.hasOwnProperty("_id"));
+			if(!blocks.hasOwnProperty("_id")){
 			db.collection('block').
 				update({'createtime': blocks.createtime,'id':blocks.id},new_blocks,{upsert:true},function(err,doc) {
 					assert.equal(err,null);
@@ -158,7 +158,7 @@ io.on("connection", function(socket){
 			}
 			new_blocks['share'] = true;
 			console.log(blocks.hasOwnProperty("_id"));
-			if(!new_blocks.hasOwnProperty("_id")){
+			if(!blocks.hasOwnProperty("_id")){
 			db.collection('block').
 				update({'createtime': blocks.createtime,'id':blocks.id},new_blocks,{upsert:true},function(err,doc) {
 					assert.equal(err,null);
