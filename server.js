@@ -193,6 +193,23 @@ io.on("connection", function(socket){
 		});
 	});
 
+	socket.on("REVISION",function(user){
+		console.log("Revision game list");
+		MongoClient.connect(mongourl, function(err, db) {
+			assert.equal(err,null);
+			console.log('Connected to MongoDB\n');
+			db.collection('block').
+				find({$or:[{'id':user.id,'share':true},{'notAnswered':{$regex : ".*"+user.id+".*"}}]},{blocks:0}).toArray(function(err,doc) {
+					assert.equal(err,null);
+					db.close();
+					console.log('success');
+					console.log('Disconnected from MongoDB\n');
+					var newJson={'data':doc};
+					socket.emit("REVISION",newJson);
+			});
+		});
+	});
+
 	socket.on("FINDBYID",function(user){
 		console.log("Load game list by userid:"+user.id);
 		MongoClient.connect(mongourl, function(err, db) {
