@@ -96,7 +96,7 @@ io.on("connection", function(socket){
 			for (key in user) {
 				new_user[key] = user[key];
 			}
-			db.collection('user').
+			db.collection('users').
 				update({'id':user.id},new_user,function(err,doc) {
 					assert.equal(err,null);
 					db.close();
@@ -108,14 +108,14 @@ io.on("connection", function(socket){
 	});
 
 	socket.on("ADDSCORE",function(user){
-		console.log("Add users score");
+		console.log("Add users score by:"+user.score);
 		MongoClient.connect(mongourl, function(err, db) {
 			assert.equal(err,null);
 			console.log('Connected to MongoDB\n');
-			db.collection('user').
+			db.collection('users').
 				update({'id':user.user1},{$inc:{'rank_score':user.score}},function(err,doc) {
 					assert.equal(err,null);
-					db.collection('user').
+					db.collection('users').
 					update({'id':user.user2},{$inc:{'rank_score':user.score}},function(err,doc) {
 						assert.equal(err,null);
 						db.close();
@@ -308,10 +308,4 @@ io.on("connection", function(socket){
 
 server.listen(app.get('port'),function(){
 	console.log("---Server Running---");
-	translate("odd male", {to: 'zh-CN'}).then(res => {
-		console.log(res.text);
-		console.log(res.from.language.iso);
-	}).catch(err => {
-		console.error(err);
-	});
 }); 
