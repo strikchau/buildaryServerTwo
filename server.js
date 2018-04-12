@@ -23,7 +23,7 @@ io.on("connection", function(socket){
 		translate(word.word, {to: 'en'}).then(res => {
 			console.log(res.text);
 			console.log(res.from.language.iso);
-			socket.emit("TOENG",{result:res.text});
+			socket.emit("TOENGLISH",{result:res.text});
 		}).catch(err => {
 			console.error(err);
 		});
