@@ -299,4 +299,10 @@ server.listen(app.get('port'),function(){
 	}).catch(err => {
 		console.error(err);
 	});
+	translate("odd male", {to: 'zh-CN'}).then(res => {
+		console.log(res.text);
+		console.log(res.from.language.iso);
+	}).catch(err => {
+		console.error(err);
+	});
 }); 
