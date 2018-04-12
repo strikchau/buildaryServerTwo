@@ -20,7 +20,7 @@ io.on("connection", function(socket){
 	});
 
 	socket.on("TOENGLISH",function(word){
-		translate(word.word, {from:'zh-CN',to: 'en'}).then(res => {
+		translate(word.word, {from:'zh-TW',to: 'en'}).then(res => {
 			console.log(res.text);
 			console.log(res.from.language.iso);
 			socket.emit("TOENGLISH",{result:res.text});
@@ -30,7 +30,7 @@ io.on("connection", function(socket){
 	});
 
 	socket.on("TOCHINESE",function(word){
-		translate(word.word, {from:'en',to: 'zh-CN'}).then(res => {
+		translate(word.word, {from:'en',to: 'zh-TW'}).then(res => {
 			console.log(res.text);
 			console.log(res.from.language.iso);
 			socket.emit("TOCHINESE",{result:res.text});
