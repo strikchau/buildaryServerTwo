@@ -125,13 +125,13 @@ io.on("connection", function(socket){
 				new_blocks[key] = blocks[key];
 			}
 			new_blocks['share'] = false;
-			console.log(blocks.hasOwnProperty("_id"));
+			console.log("Has _id:"+blocks.hasOwnProperty("_id"));
 			if(!blocks.hasOwnProperty("_id")){
 			db.collection('block').
 				update({'createtime': blocks.createtime,'id':blocks.id},new_blocks,{upsert:true},function(err,doc) {
 					assert.equal(err,null);
 					db.close();
-					console.log('success');
+					console.log('success new save');
 					console.log('Disconnected from MongoDB\n');
 			});}
 			else{
@@ -139,7 +139,7 @@ io.on("connection", function(socket){
 				update({_id: ObjectId(blocks._id)},new_blocks,function(err,doc) {
 					assert.equal(err,null);
 					db.close();
-					console.log('success');
+					console.log('success update save');
 					console.log('Disconnected from MongoDB\n');
 				});
 			}
@@ -157,13 +157,13 @@ io.on("connection", function(socket){
 				new_blocks[key] = blocks[key];
 			}
 			new_blocks['share'] = true;
-			console.log(blocks.hasOwnProperty("_id"));
+			console.log("Has _id:"+blocks.hasOwnProperty("_id"));			
 			if(!blocks.hasOwnProperty("_id")){
 			db.collection('block').
 				update({'createtime': blocks.createtime,'id':blocks.id},new_blocks,{upsert:true},function(err,doc) {
 					assert.equal(err,null);
 					db.close();
-					console.log('success');
+					console.log('success new share');
 					console.log('Disconnected from MongoDB\n');
 			});}
 			else{
@@ -171,7 +171,7 @@ io.on("connection", function(socket){
 				update({_id: ObjectId(blocks._id)},new_blocks,function(err,doc) {
 					assert.equal(err,null);
 					db.close();
-					console.log('success');
+					console.log('success update share');
 					console.log('Disconnected from MongoDB\n');
 				});
 			}
