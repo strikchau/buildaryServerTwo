@@ -19,9 +19,24 @@ io.on("connection", function(socket){
 		socket.emit("USER_CONNECTED",{message:'test'});
 	});
 
-	socket.on("TOENG",function(){
-		console.log("User connected");
-		socket.emit("USER_CONNECTED",{message:'test'});
+	socket.on("TOENGLISH",function(word){
+		translate(word.word, {to: 'en'}).then(res => {
+			console.log(res.text);
+			console.log(res.from.language.iso);
+			socket.emit("TOENG",{result:res.text});
+		}).catch(err => {
+			console.error(err);
+		});
+	});
+
+	socket.on("TOCHINESE",function(word){
+		translate(word.word, {to: 'zh-CN'}).then(res => {
+			console.log(res.text);
+			console.log(res.from.language.iso);
+			socket.emit("TOCHINESE",{result:res.text});
+		}).catch(err => {
+			console.error(err);
+		});
 	});
 
 	socket.on("LOGIN",function(email){
@@ -293,12 +308,6 @@ io.on("connection", function(socket){
 
 server.listen(app.get('port'),function(){
 	console.log("---Server Running---");
-	translate("奇男", {to: 'en'}).then(res => {
-		console.log(res.text);
-		console.log(res.from.language.iso);
-	}).catch(err => {
-		console.error(err);
-	});
 	translate("odd male", {to: 'zh-CN'}).then(res => {
 		console.log(res.text);
 		console.log(res.from.language.iso);
