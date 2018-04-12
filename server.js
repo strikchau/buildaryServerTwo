@@ -18,7 +18,6 @@ io.on("connection", function(socket){
 		socket.emit("USER_CONNECTED",{message:'test'});
 	});
 	socket.on("LOGIN",function(email){
-		
 		console.log("User login id:"+email.id);
 		MongoClient.connect(mongourl, function(err, db) {
 			assert.equal(err,null);
@@ -46,6 +45,22 @@ io.on("connection", function(socket){
 					}
 					socket.emit("LOGIN",currentUser);
 				},2000)
+				});
+		});
+	});
+
+	socket.on("GETUSER",function(user){
+		console.log("User login id:"+user.id);
+		MongoClient.connect(mongourl, function(err, db) {
+			assert.equal(err,null);
+			console.log('Connected to MongoDB\n');
+			db.collection('users').
+				findOne({id: user.id},function(err,doc) {
+					assert.equal(err,null);
+					db.close();
+					console.log(doc);
+					console.log('Disconnected from MongoDB\n');
+					socket.emit("GETUSER",doc);
 				});
 		});
 	});
