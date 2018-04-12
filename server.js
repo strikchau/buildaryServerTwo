@@ -6,6 +6,7 @@ var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 var async = require('async');
 var ObjectId = require('mongodb').ObjectID;
+var translate = require('google-translate-api');
 var mongourl = 'mongodb://s1141002:159753@ds123658.mlab.com:23658/buildary';
 var currentUser={};
 app.set('port',process.env.PORT || 8099);
@@ -17,6 +18,12 @@ io.on("connection", function(socket){
 		console.log("User connected");
 		socket.emit("USER_CONNECTED",{message:'test'});
 	});
+
+	socket.on("TOENG",function(){
+		console.log("User connected");
+		socket.emit("USER_CONNECTED",{message:'test'});
+	});
+
 	socket.on("LOGIN",function(email){
 		console.log("User login id:"+email.id);
 		MongoClient.connect(mongourl, function(err, db) {
@@ -286,4 +293,10 @@ io.on("connection", function(socket){
 
 server.listen(app.get('port'),function(){
 	console.log("---Server Running---");
+	translate("奇男", {to: 'en'}).then(res => {
+		console.log(res.text);
+		console.log(res.from.language.iso);
+	}).catch(err => {
+		console.error(err);
+	});
 }); 
