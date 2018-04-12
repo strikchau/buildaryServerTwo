@@ -70,6 +70,25 @@ io.on("connection", function(socket){
 		});
 	});
 
+	socket.on("ADDSCORE",function(user){
+		console.log("Add users score");
+		MongoClient.connect(mongourl, function(err, db) {
+			assert.equal(err,null);
+			console.log('Connected to MongoDB\n');
+			db.collection('user').
+				update({'id':user.user1},{$inc:{'rank_score':user.score}},function(err,doc) {
+					assert.equal(err,null);
+					db.collection('user').
+					update({'id':user.user2},{$inc:{'rank_score':user.score}},function(err,doc) {
+						assert.equal(err,null);
+						db.close();
+						console.log('success');
+						console.log('Disconnected from MongoDB\n');
+				});
+			});
+		});
+	});
+
 	socket.on("GENERATOR",function(category){
 		console.log("Generate word with category:"+category.category);
 		MongoClient.connect(mongourl, function(err, db) {
