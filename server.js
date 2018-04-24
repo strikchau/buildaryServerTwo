@@ -56,9 +56,16 @@ io.on("connection", function(socket){
 							assert.equal(err,null);
 							console.log("Insert was successful!");
 							doc=new_user;
+							db.close();
+							console.log(doc);
+							console.log('Disconnected from MongoDB\n');
+							for (key in doc) {
+								currentUser[key] = doc[key];
+							}
+							socket.emit("LOGIN",currentUser);
 						});
 					}
-					setTimeout(function () {
+					else{
 					db.close();
 					console.log(doc);
 					console.log('Disconnected from MongoDB\n');
@@ -66,7 +73,7 @@ io.on("connection", function(socket){
 						currentUser[key] = doc[key];
 					}
 					socket.emit("LOGIN",currentUser);
-				},2000)
+				}
 				});
 		});
 	});
