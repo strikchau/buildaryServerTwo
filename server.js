@@ -313,6 +313,8 @@ io.on("connection", function(socket){
 	});
 });
 
+app.use(express.static('view'));
+
 server.listen(app.get('port'),function(){
 	console.log("---Server Running---");
 }); 
