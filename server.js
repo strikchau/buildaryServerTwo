@@ -247,7 +247,7 @@ io.on("connection", function(socket){
 			assert.equal(err,null);
 			console.log('Connected to MongoDB\n');
 			db.collection('block').
-				find({'id':blocks.id,'share':false},{block:0}).sort({'createtime':-1}).toArray(function(err,doc) {
+				find({'id':blocks.id,'share':false,demo:{ $exists : false }},{block:0}).sort({'createtime':-1}).toArray(function(err,doc) {
 					assert.equal(err,null);
 					db.close();
 					console.log('success');
