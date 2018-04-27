@@ -315,12 +315,12 @@ io.on("connection", function(socket){
 
 app.use(express.static('view'));
 
-app.get('/link',function(req,res) {
+app.get('/download',function(req,res) {
 	res.writeHead(200, {"Content-Type": "text/html"});
 	res.write('<html><head><title>BuildARy related links</title></head>');
-	res.write('<body><H1>Related Links</H1>');
+	res.write('<body><H1>BuildARy Related Links</H1>');
 	res.write('<ol>');
-	res.write('<li><a target="_blank" href="https://drive.google.com/file/d/15zOl2U5M_xnUsj5sjC598cvmT9e1dp3k/view">Game Download</a></li>');
+	res.write('<li><a target="_blank" href="https://www.dropbox.com/s/91aoioxmphh0e1h/buildary.apk?dl=0">Game Download</a></li>');
 	res.write('<li><a target="_blank" href="https://drive.google.com/file/d/1lJpf-d8kniVAbz0pyafr8OAx-RBQjEQv/view?usp=sharing">QR code Download</a></li>');
 	res.write('<li><a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSfhNMXsPDDTCjtpMsVSL561jLSiG5Sc-5oFQk_RWt0k2Q1RoA/viewform?usp=sf_link">Online Survey</a></li>');
 	res.write('</ol>');
