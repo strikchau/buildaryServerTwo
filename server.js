@@ -319,6 +319,7 @@ app.get('/download',function(req,res) {
 	res.writeHead(200, {"Content-Type": "text/html"});
 	res.write('<html><head><title>BuildARy related links</title></head>');
 	res.write('<body><H1>BuildARy Related Links</H1>');
+	res.write('<H2><font color="red">You are recommended to watch the demo viedo first before using BuildARy</font></H2>');
 	res.write('<ol>');
 	res.write('<li><a target="_blank" href="https://youtu.be/_A5KpeL5kxY">Introduction and Demo of BuildARy</a><br/>If you are interested to play BuildARy, feel free to download the game from the link below(only for android)</li>');	
 	res.write('<li><a target="_blank" href="https://www.dropbox.com/s/91aoioxmphh0e1h/buildary.apk?dl=0">Game Download</a> (If you cannot download the game from this link, you may try <a target="_blank" href="https://drive.google.com/file/d/15zOl2U5M_xnUsj5sjC598cvmT9e1dp3k/view?usp=sharing">this</a>)</li>');
